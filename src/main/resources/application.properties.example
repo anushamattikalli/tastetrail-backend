@@ -1,0 +1,22 @@
+spring.application.name=tastetrail-backend
+server.port=${PORT:8080}
+
+# Database Configuration (Set via environment variables in production or edit locally)
+spring.datasource.url=${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/taste_trail_db}
+spring.datasource.username=${SPRING_DATASOURCE_USERNAME:root}
+spring.datasource.password=${SPRING_DATASOURCE_PASSWORD:YOUR_DATABASE_PASSWORD}
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=false
+spring.jpa.properties.hibernate.format_sql=false
+
+# JWT Configuration (Must be a 256-bit base64-encoded secret in production)
+jwt.secret=${JWT_SECRET:YOUR_BASE64_ENCODED_256_BIT_SECRET_KEY}
+jwt.expiration=${JWT_EXPIRATION:86400000}
+
+# Optional Frontend URL for production CORS (e.g. https://your-app.vercel.app)
+frontend.url=${FRONTEND_URL:}
+
+logging.level.org.springframework.security=INFO
+spring.jpa.open-in-view=false
