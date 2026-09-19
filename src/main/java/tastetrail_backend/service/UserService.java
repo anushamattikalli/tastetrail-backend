@@ -40,30 +40,48 @@ public class UserService {
 
         return userRepository.save(user);
     }
-
-    // Update User
+ // Update User
     public User updateUser(Long id, User updatedUser) {
 
         User existingUser = userRepository.findById(id)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("User not found"));
 
-        existingUser.setName(updatedUser.getName());
-        existingUser.setUsername(updatedUser.getUsername());
-        existingUser.setEmail(updatedUser.getEmail());
-        existingUser.setPhone(updatedUser.getPhone());
-        existingUser.setAddress(updatedUser.getAddress());
-        existingUser.setRole(updatedUser.getRole());
+        if (updatedUser.getName() != null) {
+            existingUser.setName(updatedUser.getName());
+        }
+
+        if (updatedUser.getUsername() != null) {
+            existingUser.setUsername(updatedUser.getUsername());
+        }
+
+        if (updatedUser.getEmail() != null) {
+            existingUser.setEmail(updatedUser.getEmail());
+        }
+
+        if (updatedUser.getPhone() != null) {
+            existingUser.setPhone(updatedUser.getPhone());
+        }
+
+        if (updatedUser.getAddress() != null) {
+            existingUser.setAddress(updatedUser.getAddress());
+        }
+
+        if (updatedUser.getRole() != null) {
+            existingUser.setRole(updatedUser.getRole());
+        }
 
         // Encrypt password only when a new password is provided
         if (updatedUser.getPassword() != null
                 && !updatedUser.getPassword().isBlank()) {
+
             existingUser.setPassword(
                     passwordEncoder.encode(updatedUser.getPassword()));
         }
 
         return userRepository.save(existingUser);
     }
+ 
 
     // Delete user
     public void deleteUser(Long id) {
